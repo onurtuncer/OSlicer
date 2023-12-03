@@ -1,3 +1,6 @@
 [submodule "OSlicer/vendor/hello_imgui"]
 	path = OSlicer/vendor/hello_imgui
 	url = https://github.com/pthom/hello_imgui.git
+[submodule "OSlicer/vendor/vcpkg"]
+	path = OSlicer/vendor/vcpkg
+	url = https://github.com/microsoft/vcpkg.git

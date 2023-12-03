@@ -1,0 +1,8 @@
+{
+    "name": "OSlicer",
+    "version-string": "0.1",
+    "dependencies": [
+        "spdlog",
+        "glm"
+    ]
+}
