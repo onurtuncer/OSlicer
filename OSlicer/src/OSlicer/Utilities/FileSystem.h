@@ -65,4 +65,4 @@ namespace OSlicer {
 		static bool SetEnvironmentVariable(const std::string& key, const std::string& value);
 		static std::string GetEnvironmentVariable(const std::string& key);
 	};
-}
+} // namespace OSlicer

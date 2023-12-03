@@ -7,8 +7,7 @@ namespace OSlicer {
 
 	void InitializeCore();
 	void ShutdownCore();
-
-}
+} // namespace OSlicer
 
 #if !defined(OS_PLATFORM_WINDOWS) && !defined(OS_PLATFORM_LINUX)
 	#error Unknown platform.
