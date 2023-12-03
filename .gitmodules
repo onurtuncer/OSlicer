@@ -1,0 +1,3 @@
+[submodule "OSlicer/vendor/hello_imgui"]
+	path = OSlicer/vendor/hello_imgui
+	url = https://github.com/pthom/hello_imgui.git

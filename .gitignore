@@ -1,0 +1,48 @@
+# Binaries
+**/bin/
+!vendor/bin/premake/
+!OSlicer/vendor/assimp/bin
+!OSlicer/vendor/mono/bin
+bin-int/
+obj/
+**/cache/**
+**/Cache/**
+OSlicer/vendor/VulkanSDK
+
+Intermediates/
+Binaries
+__pycache__
+
+# Visual Studio files and folder
+.vs/
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
+**.csproj
+**.nsight-gfxproj
+**.DotSettings
+**.user
+
+.idea/
+Makefile
+*.make
+*.a
+
+# LFS Folders
+lfs/
+hooks/
+
+# Meta Files
+**.meta
+
+# Log files
+**.log
+
+# Auto saves
+*.auto
+
+# Dumps
+*.nvdbg
+*.nv-gpudmp
+*gpudmp.json
