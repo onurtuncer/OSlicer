@@ -6,7 +6,6 @@
 
 namespace Hazel {
 
-	// TODO: Should this store previous size?
 	class WindowResizeEvent : public Event
 	{
 	public:
