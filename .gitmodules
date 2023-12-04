@@ -4,3 +4,6 @@
 [submodule "OSlicer/vendor/vcpkg"]
 	path = OSlicer/vendor/vcpkg
 	url = https://github.com/microsoft/vcpkg.git
+[submodule "OSlicer/vendor/nativefiledialog-extended"]
+	path = OSlicer/vendor/nativefiledialog-extended
+	url = https://github.com/btzy/nativefiledialog-extended.git
