@@ -3,6 +3,9 @@
     "version-string": "0.1",
     "dependencies": [
         "spdlog",
-        "glm"
+        "glfw3"
+        "glm",
+        "stb",
+        "freetype"
     ]
 }
