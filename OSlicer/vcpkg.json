@@ -1,12 +1,13 @@
 {
-    "name": "OSlicer",
+    "name": "oslicer",
     "version-string": "0.1",
     "dependencies": [
         "spdlog",
-        "glfw3"
+        "glfw3",
         "glm",
         "stb",
         "assimp",
+        "nativefiledialog",
         "freetype"     
     ]
 }
