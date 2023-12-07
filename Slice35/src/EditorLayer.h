@@ -11,7 +11,7 @@
 
 #include <string>
 
-#include "Hazel/Editor/SceneHierarchyPanel.h"
+#include "OSlicer/Editor/SceneHierarchyPanel.h"
 #include "Panels/ContentBrowserPanel.h"
 #include "Panels/ProjectSettingsWindow.h"
 #include "Panels/ApplicationSettingsPanel.h"
@@ -26,7 +26,7 @@
 
 #include <future>
 
-namespace Hazel {
+namespace OSlicer {
 
 	class EditorLayer : public Layer
 	{

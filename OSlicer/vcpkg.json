@@ -1,27 +1,12 @@
 {
-    "name": "oslicer-project",
-    "version": "1.0",
-    "description": "OSlicer library and application",
+    "name": "OSlicer",
+    "version-string": "0.1",
     "dependencies": [
-      {
-        "name": "nativefiledialog"
-      },
-      {
-        "name": "spdlog"
-      },
-      {
-        "name": "glm"
-      },
-      {
-        "name": "glfw3"
-      },
-      {
-        "name": "stb"
-      },
-      {
-        "name": "freetype"
-      }
-    ],
-    "port-version": 2
-  }
-  
+        "spdlog",
+        "glfw3"
+        "glm",
+        "stb",
+        "assimp",
+        "freetype"     
+    ]
+}

@@ -22,9 +22,9 @@
 #include <OSlicer/Core/Base.h>
 #include <OSlicer/Core/Events/Event.h>
 #include <OSlicer/Core/Log.h>
-// #include <OSlicer/Core/Math/Mat4.h>
+#include <OSlicer/Core/Math/Mat4.h>
 #include <OSlicer/Core/Memory.h>
-// #include <OSlicer/Core/Delegate.h>
+#include <OSlicer/Core/Delegate.h>
 
 /* // Jolt (Safety because this file has to be included before all other Jolt headers, at all times)
 #ifdef OS_DEBUG // NOTE(Emily): This is a bit of a hacky fix for some dark magic that happens in Jolt
