@@ -8,7 +8,7 @@ find_package(spdlog CONFIG REQUIRED)
 ## Find dependencies
 find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
-
+find_package(assimp CONFIG REQUIRED)
 find_package(unofficial-nativefiledialog CONFIG REQUIRED)
 
 # find_package(freetype REQUIRED)
@@ -104,11 +104,10 @@ endif()
 
 # if(LINUX)
 
-
 if(WIN32)
-    target_link_libraries(${PROJECT_NAME} PRIVATE  glfw imgui imm32 glm::glm spdlog::spdlog unofficial::nativefiledialog::nfd stb_image)
+    target_link_libraries(${PROJECT_NAME} PRIVATE  assimp::assimp glfw imgui imm32 glm::glm spdlog::spdlog unofficial::nativefiledialog::nfd stb_image)
 else()
-    target_link_libraries(${PROJECT_NAME} PRIVATE  glfw imgui glm::glm spdlog::spdlog unofficial::nativefiledialog::nfd stb_image)
+    target_link_libraries(${PROJECT_NAME} PRIVATE  assimp::assimp glfw imgui glm::glm spdlog::spdlog unofficial::nativefiledialog::nfd stb_image)
 endif()
 
 # if (ADVANCED_TEXT)
