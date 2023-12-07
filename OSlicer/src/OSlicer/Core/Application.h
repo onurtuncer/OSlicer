@@ -5,7 +5,7 @@
 #include "OSlicer/Core/Timer.h"
 #include "OSlicer/Core/Window.h"
 #include "OSlicer/Core/LayerStack.h"
-#include "OSlicer/Script/ScriptEngine.h"
+// #include "OSlicer/Script/ScriptEngine.h"
 #include "OSlicer/Renderer/RendererConfig.h"
 
 #include "OSlicer/Core/ApplicationSettings.h"
@@ -15,11 +15,11 @@
 #include "OSlicer/ImGui/ImGuiLayer.h"
 #include <queue>
 
-namespace Hazel {
+namespace OSlicer {
 
 	struct ApplicationSpecification
 	{
-		std::string Name = "Hazel";
+		std::string Name = "OSlicer";
 		uint32_t WindowWidth = 1600, WindowHeight = 900;
 		bool WindowDecorated = false;
 		bool Fullscreen = false;
@@ -28,7 +28,7 @@ namespace Hazel {
 		bool StartMaximized = true;
 		bool Resizable = true;
 		bool EnableImGui = true;
-		ScriptEngineConfig ScriptConfig;
+	//	ScriptEngineConfig ScriptConfig;
 		RendererConfig RenderConfig;
 		ThreadingPolicy CoreThreadingPolicy = ThreadingPolicy::MultiThreaded;
 		std::filesystem::path IconPath;
@@ -165,4 +165,5 @@ namespace Hazel {
 
 	// Implemented by CLIENT
 	Application* CreateApplication(int argc, char** argv);
-}
+
+} // namespace OSlicer

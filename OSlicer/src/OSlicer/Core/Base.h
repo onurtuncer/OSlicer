@@ -4,7 +4,6 @@
 #include "Ref.h"
 
 namespace OSlicer {
-
 	void InitializeCore();
 	void ShutdownCore();
 } // namespace OSlicer

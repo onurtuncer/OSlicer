@@ -62,25 +62,23 @@ namespace OSlicer {
 		std::mutex m_Mutex, m_StatsMutex;
 	};
 
-
-	class Allocator
-	{
-	public:
-		static void Init();
-
-		static void* AllocateRaw(size_t size);
-
-		static void* Allocate(size_t size);
-		static void* Allocate(size_t size, const char* desc);
-		static void* Allocate(size_t size, const char* file, int line);
-		static void Free(void* memory);
-
-		static const AllocatorData::AllocationStatsMap& GetAllocationStats() { return s_Data->m_AllocationStatsMap; }
-	private:
-		inline static AllocatorData* s_Data = nullptr;
+	class Allocator	{
+		public:
+			static void Init();
+	
+			static void* AllocateRaw(size_t size);
+	
+			static void* Allocate(size_t size);
+			static void* Allocate(size_t size, const char* desc);
+			static void* Allocate(size_t size, const char* file, int line);
+			static void Free(void* memory);
+	
+			static const AllocatorData::AllocationStatsMap& GetAllocationStats() { return s_Data->m_AllocationStatsMap; }
+		private:
+			inline static AllocatorData* s_Data = nullptr;
 	};
 
-}
+}  // namespace OSlicer
 
 #if OS_TRACK_MEMORY
 

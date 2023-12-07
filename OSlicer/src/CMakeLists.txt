@@ -1,5 +1,5 @@
 
-cmake_minimum_required(3.26)
+cmake_minimum_required(VERSION 3.15...3.25)
 
 find_package(spdlog CONFIG REQUIRED) 
 
@@ -8,10 +8,13 @@ find_package(spdlog CONFIG REQUIRED)
 ## Find dependencies
 find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
-find_package(freetype REQUIRED)
 
-# stb does not have a CMake build, but is header-only
-find_path(STB_INCLUDE_DIRS "stb.h") 
+find_package(unofficial-nativefiledialog CONFIG REQUIRED)
+
+# find_package(freetype REQUIRED)
+
+# # stb does not have a CMake build, but is header-only
+# find_path(STB_INCLUDE_DIRS "stb.h") 
 
 # https://github.com/jokteur/TempoApp/blob/main/CMakeLists.txt
 
@@ -26,26 +29,23 @@ set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
-add_subdirectory("external/lunasvg")
+# add_subdirectory("external/lunasvg")
 
-if (ADVANCED_TEXT)
-    message("Advanced text support enabled")
-    if (ADVANCED_TEXT_SVG)
-        find_package(FreeType 2.12 REQUIRED)
-        message("svg text support enabled")
-        add_compile_definitions(IMGUI_ENABLE_FREETYPE_LUNASVG)
-    else()
-        find_package(Freetype 2.11 REQUIRED)
-    endif()
-    add_compile_definitions(ADVANCED_TEXT)
-    add_compile_definitions(IMGUI_ENABLE_FREETYPE)
-    add_compile_definitions(IMGUI_USE_WCHAR32)
-endif()
+# if (ADVANCED_TEXT)
+#     message("Advanced text support enabled")
+#     if (ADVANCED_TEXT_SVG)
+#         find_package(FreeType 2.12 REQUIRED)
+#         message("svg text support enabled")
+#         add_compile_definitions(IMGUI_ENABLE_FREETYPE_LUNASVG)
+#     else()
+#         find_package(Freetype 2.11 REQUIRED)
+#     endif()
+#     add_compile_definitions(ADVANCED_TEXT)
+#     add_compile_definitions(IMGUI_ENABLE_FREETYPE)
+#     add_compile_definitions(IMGUI_USE_WCHAR32)
+# endif()
 
-# Test the operating system
-if(UNIX AND NOT APPLE)
-    set(LINUX TRUE)
-endif()
+
 
 # Default cache
 # TODO: support Vulkan and Metal
@@ -57,36 +57,43 @@ elseif(APPLE)
     set(AVAILABLE_3D_BACKENDS Metal OpenGL3 Vulkan)
 endif()
 
-message(${AVAILABLE_3D_BACKENDS})
+message(STATUS "Available 3D Backends      :" ${AVAILABLE_3D_BACKENDS})
 
-# External librairies
-add_subdirectory("external/imgui")
-add_subdirectory("external/nativefiledialog-extended")
+# # External librairies
+# add_subdirectory("external/imgui")
+# add_subdirectory("external/nativefiledialog-extended")
 
-# For GLFWwindowHandler
-include_directories(src/glfw_handler)
+# # For GLFWwindowHandler
+# include_directories(src/glfw_handler)
 
 file(GLOB files1 "${SOURCE_DIR}/*.cpp")
 file(GLOB files2 "path/to/files2/*")
 set(src_files ospch.cpp
-              ${SOURCE_DIR}/Core/Application.cpp 
-              ${SOURCE_DIR}/Core/ApplicationSettings.cpp 
-              ${SOURCE_DIR}/Core/TimeStep.cpp 
-              ${SOURCE_DIR}/Core/Window.cpp 
-              ${SOURCE_DIR}/Core/Layer.cpp 
-              ${SOURCE_DIR}/Core/Memory.cpp
-              ${SOURCE_DIR}/Core/Ref.cpp 
-              ${SOURCE_DIR}/Core/Platform.cpp)
+              ${SOURCE_DIR}/OSlicer/Core/Application.cpp 
+              ${SOURCE_DIR}/OSlicer/Core/ApplicationSettings.cpp 
+              ${SOURCE_DIR}/OSlicer/Core/TimeStep.cpp 
+              ${SOURCE_DIR}/OSlicer/Core/Window.cpp 
+              ${SOURCE_DIR}/OSlicer/Core/Layer.cpp 
+              ${SOURCE_DIR}/OSlicer/Core/Memory.cpp
+              ${SOURCE_DIR}/OSlicer/Core/Ref.cpp 
+              ${SOURCE_DIR}/OSlicer/Core/Platform.cpp)
 
 # Files for the project
-set(src_files
-  #  "include/im_config.h"
-    "external/imgui_bindings/imgui_impl_opengl3.cpp"
-    "include/tempo.h"
-    "external/imgui_bindings/imgui_impl_glfw.cpp"
-)
+# set(src_files
+#   #  "include/im_config.h"
+#     "external/imgui_bindings/imgui_impl_opengl3.cpp"
+#     "include/tempo.h"
+#     "external/imgui_bindings/imgui_impl_glfw.cpp"
+# )
 
 add_library(${PROJECT_NAME} STATIC ${src_files})
+
+# Test the operating system
+if(UNIX AND NOT APPLE)
+    target_compile_definitions(${PROJECT_NAME} PUBLIC OS_PLATFORM_LINUX)
+elseif(WIN32)
+    target_compile_definitions(${PROJECT_NAME} PUBLIC OS_PLATFORM_WINDOWS)
+endif()
 
 if(WITHOUT_CONSOLE)
     if(MSVC)
@@ -95,10 +102,13 @@ if(WITHOUT_CONSOLE)
     endif()
 endif()
 
+# if(LINUX)
+
+
 if(WIN32)
-    target_link_libraries(${PROJECT_NAME} PRIVATE  glfw Imgui imm32 nfd stb_image)
+    target_link_libraries(${PROJECT_NAME} PRIVATE  glfw imgui imm32 glm::glm spdlog::spdlog unofficial::nativefiledialog::nfd stb_image)
 else()
-    target_link_libraries(${PROJECT_NAME} PRIVATE  glfw Imgui nfd stb_image)
+    target_link_libraries(${PROJECT_NAME} PRIVATE  glfw imgui glm::glm spdlog::spdlog unofficial::nativefiledialog::nfd stb_image)
 endif()
 
 # if (ADVANCED_TEXT)
@@ -108,13 +118,11 @@ endif()
 #     target_include_directories(Tempo PUBLIC "${3RD_PARTY_DIR}/imgui/imgui/misc/freetype")
 # endif()
 
-# Includes
-target_include_directories(Tempo PUBLIC           "${SOURCE_DIR}")
 
 target_include_directories(${PROJECT_NAME} PUBLIC  "${SOURCE_DIR}"
                                                    "${3RD_PARTY_DIR}/imgui/imgui"
-                                                   "${3RD_PARTY_DIR}/imgui/imgui/misc/cpp"
-                                                    ${STB_INCLUDE_DIRS})
+                                                   "${3RD_PARTY_DIR}/imgui/imgui/misc/cpp")
+                                                   # ${STB_INCLUDE_DIRS})
 
 # # For GLFWwindowHandler
 # target_include_directories(Tempo PRIVATE "${PROJECT_SOURCE_DIR}/glfw_handler")
@@ -131,7 +139,7 @@ endif()
 
 source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" FILES ${source_list})
 
-set_target_properties(glad glfw Imgui nfd PROPERTIES FOLDER InternalTargets)
+set_target_properties(glfw PROPERTIES FOLDER InternalTargets)
 
 get_directory_property(is_subproject PARENT_DIRECTORY)
 
